@@ -7,7 +7,13 @@ git remote add origin URL
 git push -u origin master
 
 #add local change file
-git add 
+#change
+git add
+git commit -m ""
+git pull --rebase
+git push -u origin master
+
+
 git pull URL
 git pull --rebase origin master
 git push -u origin master
