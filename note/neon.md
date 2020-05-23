@@ -1,4 +1,16 @@
-  建议的NEON调优步骤
+  >使用NEON主要有四种方法：
+    NEON优化库(Optimized libraries)
+    向量化编译器(Vectorizing compilers)
+    NEON intrinsics
+    NEON assembly
+根据优化程度需求不同，第4种最为底层，若熟练掌握效果最佳，一般也会配合第3种一起使用。本文将会重点介绍第3、4种方法。先简要介绍前两种。
+    Libraries：直接在程序中调用优化库
+        OpenMax DL：支持加速视频编解码、信号处理、色彩空间转换等；
+        Ne10：一个ARM的开源项目，提供数学运算、图像处理、FFT函数等。
+    Vectorizing compilers：GCC编译器的向量优化选项
+        在GCC选项中加入向量化表示能有助于C代码生成NEON代码，如-ftree-vectorize。
+        
+建议的NEON调优步骤
 
     理清所需的寄存器、指令。 建议根据要实现的任务，画出数据变换流程，和每步所需的具体指令，尽可能找到最优的实现流程。这一步非常关键，如果思路出错或是不够优化，则会影响使用NEON的效果，并且对程序修改带来麻烦，一定要找到最优的实现算法哦~
     先实现intrinsics（可选）。 初学者先实现intrinsics是有好处的，字面理解性更强，且有助于理解NEON指令。建议随时打印关键步骤的数据，以检查程序的正误。
