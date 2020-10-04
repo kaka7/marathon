@@ -2,18 +2,18 @@
 using namespace std;
 int main(int argc, char const *argv[])
 {
-    int i =0;
-    int i1=2;
-    int * const p1=&i;
-    // p1=&i1;//error:顶层const,不能改变指针本身
+    int a=3,aa=4;
+    const int aaa=0;//值不能变
+    const int *c=&a;//常量指针
+    // *c=3;错误,不能通过c来改变对应的值
+    c=&aa;//可以改变指针的地址
 
-    const int c1=42;
-    const int c2 =43;
-    int c3=44;
-    const int *p2=&c1;
-    // *p2=43;//error:底层const,能改变指针,但不能改变指针的值
-    p2=&c2;
-    p2=&c3;
-    const int & p3=c1;//底层const,拷贝构造函数
+    int * const d=&a;//指针常量
+    *d=4;//通过指针改变值
+    // d=&aa; 错误,不能改变指针的地址
+
+    const int * const ccc=&a;//指针和值都不能变
+
+    // 区别,看const在*的位置来定
     return 0;
 }

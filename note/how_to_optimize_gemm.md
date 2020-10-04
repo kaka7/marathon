@@ -17,7 +17,9 @@
 ##x86列主序
 https://github.com/flame/how-to-optimize-gemm   
 (j*lda)
-
+分支预测可参考perf例子
+elso https://www.leiphone.com/news/201704/Puevv3ZWxn0heoEv.html 
+pack技巧参考https://blog.csdn.net/just_sort/article/details/108412760
 
 * MMult1.c //将最内层的循环循环包装成函数,可理解为内联,==一般编译器时会自动内联,比较O3 优化后,内联的目的是避免函数的调用==()
 * MMult2.c //将4行做一个pack ,其实没有改变计算顺序,也没有利用cache,并非一次算四列　因为是列主序(j),j+1就是跳一行,所以和原来是一样的

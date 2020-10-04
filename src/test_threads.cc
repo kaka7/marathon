@@ -161,7 +161,7 @@ int main(int argc, char const *argv[])
 //         }
 //     }
 //     void ExeMSGProcess()
-//     {
+//     {periods
 //         for (auto i = 0; i < 10; ++i)
 //         {
 //             mt.lock();

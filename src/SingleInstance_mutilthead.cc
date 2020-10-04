@@ -12,7 +12,12 @@
 
 区别:单例类的实现文件中(或在main中)
 懒汉式 Singleton* Singleton::instance = NULL; 初始化为null 就要类内部创建,就不安全
-恶汉式 Singleton_Hungry* Singleton_Hungry::singleton = new Singleton_Hungry; 在main之前创建,就是安全的
+恶汉式 Singleton_Hungry* Singleton_Hungry::singleton = new Singleton_Hungry; 在main之前创建,就是安全的,但是,必须delete,只能是显示调用自定义public的析构函数(默认构造和析构无法在单例中使用),此时全局数据区中，存储的并不是一个实例对象，而是一个实例对象的指针，即一个地址变量而已！实例对象呢？在堆区，因为是通过new得来的！虽然这样能够减小全局数据区的占用，把实例对象这一大坨都放到堆区。
+smart-ptr
+定义时
+	static void Destory(CSingleton *){ cout << "在这里销毁单例对象！" << endl; };//注意这里
+	static shared_ptr<CSingleton> myInstance; 
+使用 shared_ptr<CSingleton> CSingleton::myInstance(new CSingleton(), CSingleton::Destory);
 
 //#懒汉版（Lazy Singleton）
 单例实例在第一次被使用时才进行初始化，这叫做延迟初始化。

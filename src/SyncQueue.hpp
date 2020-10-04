@@ -21,13 +21,13 @@ public:
 
     void Put(T &&x)
     {
-        Add(std::forward<T>(x));
+        Add(std::forward<T>(x));//todo
     }
 
     void Take(std::list<T> &list)
     {
-        std::unique_lock<std::mutex> locker(m_mutex);
-        m_notEmpty.wait(locker, [this] { return m_needStop || NotEmpty(); });
+        std::unique_lock<std::mutex> locker(m_mutex);//不满足(停止或者不为空时)条件变量会释放mutex并waiting,等待其他线程唤醒notify_one/all
+        m_notEmpty.wait(locker, [this] { return m_needStop || NotEmpty(); });//至少一个false才等待
 
         if (m_needStop)
             return;
